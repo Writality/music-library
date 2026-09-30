@@ -12,16 +12,34 @@ Some sources need a login or checkout. That's fine, just send the link. A couple
 
 ## Send a pull request
 
-You can also add music directly. Include the MP3 in `tracks/<collection>/` and add a track entry to `manifest.json` with a unique integer `id`, `file`, `title`, `artist`, `sourceUrl`, `license`, `licenseUrl`, `attribution`, and `changes`. Add the ID to the appropriate collection's `tracks` list. Use a negative ID to avoid clashing with app tracks. For a new collection, add its `id`, `title`, `description`, and track IDs to `collections` too.
+You can also add music directly. Put the MP3 in `tracks/<collection>/`, then add an entry like this to `manifest.json` (remove the comments before saving; JSON does not allow them):
+
+```jsonc
+{
+  "id": 2030, // Pick an unused positive integer for this library's track.
+  "file": "tracks/lo-fi/30.mp3",
+  "title": "Track title",
+  "artist": "Artist name",
+  "sourceUrl": "https://example.com/original-track",
+  "license": "CC BY 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+  "attribution": "Track title by Artist name",
+  "changes": "Original file; no changes." // Describe edits here if you modified the audio.
+}
+```
+
+Add the ID to the appropriate collection's `tracks` list. For a new collection, add its `id`, `title`, `description`, `image`, and track IDs to `collections` too. Collection IDs use lowercase letters, numbers, and hyphens.
+
+Each collection has its own image directory, `images/<collection-id>/`. Put a PNG, JPEG, WebP, or AVIF image there and set `image` to its path, for example `"image": "images/lo-fi/cover.webp"`. Writality can use that path to load the image. Set `image` to `null` while the artwork is pending; update it when you upload the file. Include the image creator and usage terms in the pull request when the artwork is not yours.
 
 The job on `main` fills in `duration`, `sizeBytes`, and `sha256` after the pull request is merged. Leave those fields out of new entries. You can run `python3 scripts/update_manifest.py` locally if you have `ffprobe` installed.
 
 Not every track has a published license. Use the fields to describe the actual rights, without inventing a Creative Commons license:
 
 - `license`: put the published license or rights status. If the rights holder gave Writality direct permission, use `Used with permission` and explain the permitted use in the pull request.
-- `licenseUrl`: link to the published terms, a public permission statement from the rights holder, or the track's section in [ATTRIBUTION.md](ATTRIBUTION.md) documenting permission. Use the full GitHub URL so the app can open it. Do not put `N/A` or a made-up license URL here.
+- `licenseUrl`: link to published terms or a public permission statement when available. Use `N/A` if there is no public link, and explain the permission in the pull request so it can be reviewed case by case. Do not invent a URL.
 - `sourceUrl`: link to the artist's original page. For an unpublished track, link to the pull request where the artist submitted the original file.
-- `attribution`: write the credit the artist requested. `changes`: describe any edits, or use `Original file; no changes.`
+- `attribution`: write the credit the artist requested. `changes` records edits to the audio, such as trimming or converting it; use `Original file; no changes.` if there were none.
 
 I review permission to host and distribute the audio before merging. If permission is unclear, or you cannot provide the audio, open an issue or send a pull request with the source and rights information in [ATTRIBUTION.md](ATTRIBUTION.md); I can add the file after the rights are settled.
 

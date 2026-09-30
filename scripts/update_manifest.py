@@ -4,6 +4,7 @@
 import argparse
 import hashlib
 import json
+import re
 import subprocess
 from datetime import datetime, timezone
 from pathlib import Path
@@ -31,7 +32,7 @@ def main(check=False):
         track_id = track.get("id")
         file = track.get("file")
 
-        if type(track_id) is not int or track_id in ids:
+        if type(track_id) is not int or track_id <= 0 or track_id in ids:
             raise ValueError(f"Invalid or duplicate track id: {track_id}")
 
         if (
@@ -94,8 +95,31 @@ def main(check=False):
         )
 
     collection_ids = set()
+    collection_names = set()
 
     for collection in data["collections"]:
+        name = collection.get("id")
+        if (
+            not isinstance(name, str)
+            or not re.fullmatch(r"[a-z0-9]+(?:-[a-z0-9]+)*", name)
+            or name in collection_names
+        ):
+            raise ValueError(f"Invalid or duplicate collection id: {name}")
+        collection_names.add(name)
+
+        if "image" not in collection:
+            raise ValueError(f"Missing image field for collection {name}")
+        image = collection["image"]
+        if image is not None:
+            if (
+                not isinstance(image, str)
+                or Path(image).parent.as_posix() != f"images/{name}"
+                or Path(image).suffix.lower()
+                not in {".png", ".jpg", ".jpeg", ".webp", ".avif"}
+                or not (ROOT / image).is_file()
+            ):
+                raise ValueError(f"Invalid or missing image for collection {name}: {image}")
+
         track_ids = collection["tracks"]
 
         if len(track_ids) != len(set(track_ids)):
