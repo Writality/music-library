@@ -9,6 +9,7 @@ The music files and collection images in this repository remain under their sour
 - Lo-Fi: Photo by [Raj Gautam](https://www.pexels.com/@raj-gautam-847795/) on [Pexels](https://www.pexels.com/photo/vintage-cassette-tape-in-dramatic-lighting-37714018/).
 
 The Fantasy and Calm photos are used under the [Unsplash License](https://unsplash.com/license). The Lo-Fi photo is used under the [Pexels License](https://www.pexels.com/license/).
+The `*-small.jpg` files are resized copies for the app; the original uploads remain beside them.
 
 ## Lloyd Rodgers — The Little Prince ballet
 

@@ -107,26 +107,48 @@ def main(check=False):
             raise ValueError(f"Invalid or duplicate collection id: {name}")
         collection_names.add(name)
 
-        if "image" not in collection:
-            raise ValueError(f"Missing image field for collection {name}")
+        if "image" not in collection or "imageOriginal" not in collection:
+            raise ValueError(f"Missing image fields for collection {name}")
         image = collection["image"]
-        if image is not None:
+        original_image = collection["imageOriginal"]
+        if original_image is None:
+            if image is not None:
+                raise ValueError(f"Image without original for collection {name}")
+        else:
             if (
-                not isinstance(image, str)
-                or Path(image).parent.as_posix() != f"images/{name}"
-                or Path(image).suffix.lower()
+                not isinstance(original_image, str)
+                or Path(original_image).parent.as_posix() != f"images/{name}"
+                or Path(original_image).suffix.lower()
                 not in {".png", ".jpg", ".jpeg", ".webp", ".avif"}
-                or not (ROOT / image).is_file()
+                or not (ROOT / original_image).is_file()
             ):
-                raise ValueError(f"Invalid or missing image for collection {name}: {image}")
+                raise ValueError(f"Invalid or missing original image for collection {name}: {original_image}")
+            expected_image = Path(original_image).with_name(
+                f"{Path(original_image).stem}-small.jpg"
+            ).as_posix()
+            if image != expected_image:
+                raise ValueError(f"Expected image {expected_image} for collection {name}")
+            if check:
+                if not (ROOT / image).is_file():
+                    raise ValueError(f"Missing generated image: {image}")
+            else:
+                subprocess.run(
+                    [
+                        "ffmpeg", "-y", "-loglevel", "error", "-i", ROOT / original_image,
+                        "-vf", "scale=1024:1024:force_original_aspect_ratio=decrease",
+                        "-frames:v", "1", "-q:v", "5", "-map_metadata", "-1",
+                        ROOT / image,
+                    ],
+                    check=True,
+                )
 
         credit_keys = ("imageAttribution", "imageCreatorUrl", "imageSourceUrl")
         if any(key not in collection for key in credit_keys):
             raise ValueError(f"Missing image credit fields for collection {name}")
         credits = [collection[key] for key in credit_keys]
-        if image is None and any(value is not None for value in credits):
+        if original_image is None and any(value is not None for value in credits):
             raise ValueError(f"Image credit without image for collection {name}")
-        if image is not None and (
+        if original_image is not None and (
             not isinstance(credits[0], str)
             or not credits[0].strip()
             or any(

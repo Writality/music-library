@@ -28,11 +28,11 @@ You can also add music directly. Put the MP3 in `tracks/<collection>/`, then add
 }
 ```
 
-Add the ID to the appropriate collection's `tracks` list. For a new collection, add its `id`, `title`, `description`, `image`, and track IDs to `collections` too. Collection IDs use lowercase letters, numbers, and hyphens.
+Add the ID to the appropriate collection's `tracks` list. For a new collection, add its `id`, `title`, `description`, `imageOriginal`, `image`, image credits, and track IDs to `collections` too. Collection IDs use lowercase letters, numbers, and hyphens.
 
-Each collection has its own image directory, `images/<collection-id>/`. Put a PNG, JPEG, WebP, or AVIF image there and set `image` to its path, for example `"image": "images/lo-fi/cover.webp"`. Writality can use that path to load the image. Set `image` to `null` while the artwork is pending; update it when you upload the file. Add `imageAttribution` (for example, `Photo by Name on Unsplash`), `imageCreatorUrl`, and `imageSourceUrl` so the app can show credit and link to the photographer and original photo. Also record the credit and usage terms in [ATTRIBUTION.md](ATTRIBUTION.md).
+Each collection has its own image directory, `images/<collection-id>/`. Put a PNG, JPEG, WebP, or AVIF original there and set `imageOriginal` to its path, for example `"images/lo-fi/cover.jpg"`. Set `image` to the corresponding small JPEG path, for example `"images/lo-fi/cover-small.jpg"`. The manifest updater creates that image at up to 1024 pixels on its longest side; Writality should load `image`. Set both fields to `null` while artwork is pending. Add `imageAttribution` (for example, `Photo by Name on Unsplash`), `imageCreatorUrl`, and `imageSourceUrl` so the app can show credit and link to the photographer and original photo. Also record the credit and usage terms in [ATTRIBUTION.md](ATTRIBUTION.md).
 
-The job on `main` fills in `duration`, `sizeBytes`, and `sha256` after the pull request is merged. Leave those fields out of new entries. You can run `python3 scripts/update_manifest.py` locally if you have `ffprobe` installed.
+The job on `main` fills in `duration`, `sizeBytes`, and `sha256` and generates smaller images after the pull request is merged. Leave generated track fields out of new entries. You can run `python3 scripts/update_manifest.py` locally if you have FFmpeg installed.
 
 Not every track has a published license. Use the fields to describe the actual rights, without inventing a Creative Commons license:
 
