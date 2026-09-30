@@ -30,7 +30,7 @@ You can also add music directly. Put the MP3 in `tracks/<collection>/`, then add
 
 Add the ID to the appropriate collection's `tracks` list. For a new collection, add its `id`, `title`, `description`, `image`, and track IDs to `collections` too. Collection IDs use lowercase letters, numbers, and hyphens.
 
-Each collection has its own image directory, `images/<collection-id>/`. Put a PNG, JPEG, WebP, or AVIF image there and set `image` to its path, for example `"image": "images/lo-fi/cover.webp"`. Writality can use that path to load the image. Set `image` to `null` while the artwork is pending; update it when you upload the file. Include the image creator and usage terms in the pull request when the artwork is not yours.
+Each collection has its own image directory, `images/<collection-id>/`. Put a PNG, JPEG, WebP, or AVIF image there and set `image` to its path, for example `"image": "images/lo-fi/cover.webp"`. Writality can use that path to load the image. Set `image` to `null` while the artwork is pending; update it when you upload the file. Add `imageAttribution` (for example, `Photo by Name on Unsplash`), `imageCreatorUrl`, and `imageSourceUrl` so the app can show credit and link to the photographer and original photo. Also record the credit and usage terms in [ATTRIBUTION.md](ATTRIBUTION.md).
 
 The job on `main` fills in `duration`, `sizeBytes`, and `sha256` after the pull request is merged. Leave those fields out of new entries. You can run `python3 scripts/update_manifest.py` locally if you have `ffprobe` installed.
 

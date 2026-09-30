@@ -120,6 +120,22 @@ def main(check=False):
             ):
                 raise ValueError(f"Invalid or missing image for collection {name}: {image}")
 
+        credit_keys = ("imageAttribution", "imageCreatorUrl", "imageSourceUrl")
+        if any(key not in collection for key in credit_keys):
+            raise ValueError(f"Missing image credit fields for collection {name}")
+        credits = [collection[key] for key in credit_keys]
+        if image is None and any(value is not None for value in credits):
+            raise ValueError(f"Image credit without image for collection {name}")
+        if image is not None and (
+            not isinstance(credits[0], str)
+            or not credits[0].strip()
+            or any(
+                not isinstance(url, str) or not url.startswith("https://")
+                for url in credits[1:]
+            )
+        ):
+            raise ValueError(f"Incomplete image credit for collection {name}")
+
         track_ids = collection["tracks"]
 
         if len(track_ids) != len(set(track_ids)):

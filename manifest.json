@@ -7,6 +7,9 @@
       "title": "Fantasy",
       "description": "The Little Prince ballet by Lloyd Rodgers",
       "image": "images/fantasy/cover.jpg",
+      "imageAttribution": "Photo by Mary Ray on Unsplash",
+      "imageCreatorUrl": "https://unsplash.com/@mary_ray",
+      "imageSourceUrl": "https://unsplash.com/photos/MFtxkjF9FQU",
       "tracks": [
         1001,
         1002,
@@ -24,6 +27,9 @@
       "title": "Calm",
       "description": "The Little Prince ballet by Lloyd Rodgers",
       "image": "images/calm/cover.jpg",
+      "imageAttribution": "Photo by Daniel J. Schwarz on Unsplash",
+      "imageCreatorUrl": "https://unsplash.com/@danieljschwarz",
+      "imageSourceUrl": "https://unsplash.com/photos/snow-covered-mountain-under-cloudy-sky-during-daytime-pfywsjCLzKQ",
       "tracks": [
         1001,
         1002,
@@ -41,6 +47,9 @@
       "title": "Lo-Fi",
       "description": "Public Domain Lo-fi by HoliznaCC0",
       "image": "images/lo-fi/cover.jpg",
+      "imageAttribution": "Photo by Raj Gautam on Pexels",
+      "imageCreatorUrl": "https://www.pexels.com/@raj-gautam-847795/",
+      "imageSourceUrl": "https://www.pexels.com/photo/vintage-cassette-tape-in-dramatic-lighting-37714018/",
       "tracks": [
         2001,
         2002,

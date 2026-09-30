@@ -1,6 +1,14 @@
 # Attribution and source register
 
-The music files in this repository remain under their source (license) terms. Writality does not claim copyright in them. I include these credits in the app beside each track. For any future contributors, make sure to add attributions otherwise it will not be accessible.
+The music files and collection images in this repository remain under their source terms. Writality does not claim copyright in them. Track and image credits are also in `manifest.json` for the app to display. For any future contributors, make sure to add attributions otherwise it will not be accessible.
+
+## Collection images
+
+- Fantasy: Photo by [Mary Ray](https://unsplash.com/@mary_ray) on [Unsplash](https://unsplash.com/photos/MFtxkjF9FQU).
+- Calm: Photo by [Daniel J. Schwarz](https://unsplash.com/@danieljschwarz) on [Unsplash](https://unsplash.com/photos/snow-covered-mountain-under-cloudy-sky-during-daytime-pfywsjCLzKQ).
+- Lo-Fi: Photo by [Raj Gautam](https://www.pexels.com/@raj-gautam-847795/) on [Pexels](https://www.pexels.com/photo/vintage-cassette-tape-in-dramatic-lighting-37714018/).
+
+The Fantasy and Calm photos are used under the [Unsplash License](https://unsplash.com/license). The Lo-Fi photo is used under the [Pexels License](https://www.pexels.com/license/).
 
 ## Lloyd Rodgers — The Little Prince ballet
 
