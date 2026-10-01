@@ -24,27 +24,6 @@
       ]
     },
     {
-      "id": "calm",
-      "title": "Calm",
-      "description": "Gentle classical music for quiet writing.",
-      "image": "images/calm/cover-small.jpg",
-      "imageOriginal": "images/calm/cover.jpg",
-      "imageAttribution": "Photo by Daniel J. Schwarz on Unsplash",
-      "imageCreatorUrl": "https://unsplash.com/@danieljschwarz",
-      "imageSourceUrl": "https://unsplash.com/photos/snow-covered-mountain-under-cloudy-sky-during-daytime-pfywsjCLzKQ",
-      "tracks": [
-        1001,
-        1002,
-        1003,
-        1004,
-        1005,
-        1006,
-        1007,
-        1008,
-        1009
-      ]
-    },
-    {
       "id": "lo-fi",
       "title": "Lo-Fi",
       "description": "Chill Lofi vibes",
